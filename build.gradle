@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = "1.6"
+targetCompatibility = "1.6"
+
+applicationDefaultJvmArgs = [ "-Dconnection.protocol=http://",
+                              "-Dconnection.endpoint=localhost:7400/deployr",
+                              "-Dusername=testuser",
+                              "-Dpassword=changeme",
+                              "-Drepository-model=fraudModel.rData",
+                              "-Drepository-script=ccFraudScore.R",
+                              "-Drepository-directory=example-fraud-score",
+                              "-Dexample-pool-size=5",
+                              "-Dsimulate-task-size=10",
+                              "-Dallow.SelfSignedSSLCert=false"]
+                             
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.revolutionanalytics.deployr:jRBroker:7.4.7"
+}
+
+jar {
+    baseName = 'java-example-fraud-score-basics'
+    version =  '7.4.7'
+}
+
+task execute(type:JavaExec) {
+   mainClassName = "com.revo.deployr.rbroker.example.FraudScoreExample"
+   classpath = sourceSets.main.runtimeClasspath
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
