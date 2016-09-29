@@ -5,9 +5,9 @@ sourceCompatibility = "1.6"
 targetCompatibility = "1.6"
 
 applicationDefaultJvmArgs = [ "-Dconnection.protocol=http://",
-                              "-Dconnection.endpoint=localhost:7400/deployr",
+                              "-Dconnection.endpoint=localhost:8050/deployr",
                               "-Dusername=testuser",
-                              "-Dpassword=changeme",
+                              "-Dpassword=TESTUSER_PASSWORD",
                               "-Drepository-model=fraudModel.rData",
                               "-Drepository-script=ccFraudScore.R",
                               "-Drepository-directory=example-fraud-score",
@@ -20,12 +20,12 @@ repositories {
 }
 
 dependencies {
-    compile "com.revolutionanalytics.deployr:jRBroker:7.4.7"
+    compile "com.microsoft.deployr:jRBroker:8.0.5"
 }
 
 jar {
     baseName = 'java-example-fraud-score-basics'
-    version =  '7.4.7'
+    version =  '8.0.5'
 }
 
 task execute(type:JavaExec) {
